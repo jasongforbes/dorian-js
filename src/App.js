@@ -21,6 +21,7 @@ class App extends React.Component {
       frontMatter: e,
       file: postFile[i],
       loaded: false,
+      isLoading: false,
       body: null,
     }))
       .filter(post => post.frontMatter.isValid)
@@ -59,7 +60,7 @@ class App extends React.Component {
 
   getPostsToLoad() {
     return Object.keys(this.state.posts)
-      .filter(key => !this.state.posts[key].loaded)
+      .filter(key => !this.state.posts[key].loaded && !this.state.posts[key].isLoading)
       .sort(this.getPostOrdering);
   }
 
@@ -69,23 +70,32 @@ class App extends React.Component {
   }
 
   handleLoadPosts() {
-    const posts = this.state.posts;
     const numPostsToLoad = 1;
     const postsToLoad = this.getPostsToLoad();
     if (postsToLoad.length > 0) {
       postsToLoad.slice(0, numPostsToLoad).forEach((key) => {
-        posts[key] = this.loadPost(key);
-      });
-      this.setState({
-        posts,
+        const posts = this.state.posts;
+        const postRequest = new XMLHttpRequest();
+        postRequest.onreadystatechange = () => {
+          if (postRequest.readyState === 4 && // Done
+              postRequest.status === 200) {   // OK
+            this.loadPost(key, postRequest.responseText);
+          }
+        };
+        posts[key].isLoading = true;
+        this.setState({ posts });
+        postRequest.open('GET', this.state.posts[key].file, true);
+        postRequest.send(null);
       });
     }
   }
 
-  loadPost(key) {
-    const post = this.state.posts[key];
-    post.loaded = true;
-    return post;
+  loadPost(key, response) {
+    const posts = this.state.posts;
+    posts[key].loaded = true;
+    posts[key].isLoading = false;
+    posts[key].body = response;
+    this.setState({ posts });
   }
 
   render() {
@@ -104,6 +114,7 @@ class App extends React.Component {
           hasPostsToLoad={loadedPosts.length < Object.keys(this.state.posts).length}
           onLoadPosts={this.handleLoadPosts}
           posts={loadedPosts}
+          getPost={this.getPost}
         />
       </div>
     );

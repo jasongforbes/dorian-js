@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
+import PostSummary from './PostSummary';
 
 class PostScroller extends Component {
-
-  static renderPostSummary(key) {
-    return <p key={key}>{key}</p>;
-  }
 
   static isDocumentSmallerThanTwiceWindow() {
     const windowHeight = window.innerHeight || document.documentElement.offsetHeight;
@@ -20,6 +17,7 @@ class PostScroller extends Component {
   constructor(props) {
     super(props);
     this.handleViewChange = this.handleViewChange.bind(this);
+    this.renderPostSummary = this.renderPostSummary.bind(this);
   }
 
   componentDidMount() {
@@ -28,8 +26,9 @@ class PostScroller extends Component {
     this.props.onLoadPosts();
   }
 
-  componentDidUpdate() {
-    if (this.props.hasPostsToLoad &&
+  componentDidUpdate(prevProps) {
+    if (this.props.posts.length !== prevProps.posts.length &&
+        this.props.hasPostsToLoad &&
         PostScroller.isDocumentSmallerThanTwiceWindow()) {
       this.props.onLoadPosts();
     }
@@ -47,10 +46,23 @@ class PostScroller extends Component {
     }
   }
 
+  renderPostSummary(key) {
+    const post = this.props.getPost(key);
+    return (
+      <div key={key}>
+        <PostSummary
+          title={post.frontMatter.title}
+          date={post.frontMatter.date}
+          data={post.body}
+        />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="post-scroller">
-        {this.props.posts.map(PostScroller.renderPostSummary)}
+        {this.props.posts.map(this.renderPostSummary)}
       </div>
     );
   }
@@ -60,6 +72,7 @@ PostScroller.propTypes = {
   hasPostsToLoad: React.PropTypes.bool.isRequired,
   onLoadPosts: React.PropTypes.func.isRequired,
   posts: React.PropTypes.array.isRequired,
+  getPost: React.PropTypes.func.isRequired,
 };
 
 export default PostScroller;
