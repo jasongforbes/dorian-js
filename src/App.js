@@ -5,7 +5,7 @@ import PostScroller from './components/PostScroller';
 import { importAll } from './utility';
 import avatar from '../images/avatar.svg';
 
-const postFrontMatter = importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=date,expected[]=author,expected[]=title!../posts/', true, /\.md$/));
+const postFrontMatter = importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=date,expected[]=title!../posts/', true, /\.md$/));
 const postFile = importAll(require.context('!file?name=media/posts/[name].[hash].html!./loaders/markdown-loader!../posts/', true, /\.md$/));
 
 class App extends React.Component {
