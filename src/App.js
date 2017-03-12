@@ -16,6 +16,7 @@ class App extends React.Component {
     this.loadPost = this.loadPost.bind(this);
     this.getPost = this.getPost.bind(this);
     this.getPostOrdering = this.getPostOrdering.bind(this);
+    this.getData = this.getData.bind(this);
 
     const posts = postFrontMatter.map((e, i) => ({
       frontMatter: e,
@@ -54,6 +55,24 @@ class App extends React.Component {
     };
   }
 
+  getData(key, handleReturn, handleError) {
+    if (this.state.posts[key].body) {
+      handleReturn(key, this.state.posts[key].body);
+    }
+    const postRequest = new XMLHttpRequest();
+    postRequest.onreadystatechange = () => {
+      if (postRequest.readyState === 4) { // Done
+        if (postRequest.status === 200) { // OK
+          handleReturn(key, postRequest.responseText);
+        } else if (handleError) {
+          handleError(key);
+        }
+      }
+    };
+    postRequest.open('GET', this.state.posts[key].file, true);
+    postRequest.send(null);
+  }
+
   getPost(key) {
     return this.state.posts[key];
   }
@@ -75,17 +94,9 @@ class App extends React.Component {
     if (postsToLoad.length > 0) {
       postsToLoad.slice(0, numPostsToLoad).forEach((key) => {
         const posts = this.state.posts;
-        const postRequest = new XMLHttpRequest();
-        postRequest.onreadystatechange = () => {
-          if (postRequest.readyState === 4 && // Done
-              postRequest.status === 200) {   // OK
-            this.loadPost(key, postRequest.responseText);
-          }
-        };
         posts[key].isLoading = true;
         this.setState({ posts });
-        postRequest.open('GET', this.state.posts[key].file, true);
-        postRequest.send(null);
+        this.getData(key, this.loadPost);
       });
     }
   }
