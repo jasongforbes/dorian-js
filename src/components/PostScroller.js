@@ -53,7 +53,8 @@ class PostScroller extends Component {
         <PostSummary
           title={post.frontMatter.title}
           date={post.frontMatter.date}
-          data={post.body}
+          body={post.body}
+          link={key}
         />
       </div>
     );

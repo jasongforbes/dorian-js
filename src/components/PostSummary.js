@@ -1,14 +1,17 @@
 import React from 'react';
-import dateformat from 'dateformat';
+import PostHeader from './PostHeader';
 
 const PostSummary = function render(props) {
   return (
     <div className="post-summary">
-      <h2 className="post-title">{props.title}</h2>
-      <span className="post-date">{dateformat(new Date(props.date), 'dd mmm yyyy')}</span>
+      <PostHeader
+        link={props.link}
+        title={props.title}
+        date={props.date}
+      />
       <div
         className="post-preview"
-        dangerouslySetInnerHTML={{ __html: props.data }} // eslint-disable-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: props.body }} // eslint-disable-line react/no-danger
       />
     </div>
   );
@@ -17,7 +20,8 @@ const PostSummary = function render(props) {
 PostSummary.propTypes = {
   title: React.PropTypes.string.isRequired,
   date: React.PropTypes.string.isRequired,
-  data: React.PropTypes.string.isRequired,
+  body: React.PropTypes.string.isRequired,
+  link: React.PropTypes.string.isRequired,
 };
 
 export default PostSummary;
