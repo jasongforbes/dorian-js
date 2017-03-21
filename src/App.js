@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import PostScroller from './components/PostScroller';
 import NotFound from './components/NotFound';
+import Page from './components/Page';
 import Post from './components/Post';
 import { importAll, loadMarkdown } from './utility';
 import avatar from '../images/avatar.svg';
@@ -127,7 +128,20 @@ class App extends React.Component {
     const loadedPosts = Object.keys(this.state.posts)
       .filter(key => this.state.posts[key].loaded)
       .sort(this.getPostOrdering);
-
+    const pages = Object.keys(this.state.pages)
+      .sort((a, b) => this.getPage(a).frontMatter.order < this.getPage(b).frontMatter.order);
+    const pageRoutes = pages.map(key => (
+      <Route
+        key={key}
+        path={`/${key}`}
+        component={({ match }) => (
+          <Page
+            page={match.path.substr(1)}
+            getPage={this.getPage}
+          />
+        )}
+      />
+    ));
     return (
       <BrowserRouter>
         <div className="app">
@@ -136,6 +150,8 @@ class App extends React.Component {
             avatarAlt="Default Image"
             title="My Landing Page"
             description="This is the landing page description."
+            pages={pages}
+            getPage={this.getPage}
           />
           <Switch>
 
@@ -168,6 +184,8 @@ class App extends React.Component {
                 return <NotFound />;
               }}
             />
+
+            {pageRoutes}
 
             <Route component={NotFound} />
           </Switch>
