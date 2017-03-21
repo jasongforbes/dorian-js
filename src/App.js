@@ -120,14 +120,14 @@ class App extends React.Component {
       .sort(this.getPostOrdering);
 
     return (
-      <div className="app">
-        <Header
-          avatar={avatar}
-          avatarAlt="Default Image"
-          title="My Landing Page"
-          description="This is the landing page description."
-        />
-        <BrowserRouter>
+      <BrowserRouter>
+        <div className="app">
+          <Header
+            avatar={avatar}
+            avatarAlt="Default Image"
+            title="My Landing Page"
+            description="This is the landing page description."
+          />
           <Switch>
 
             <Route
@@ -162,8 +162,8 @@ class App extends React.Component {
 
             <Route component={NotFound} />
           </Switch>
-        </BrowserRouter>
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
