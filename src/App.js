@@ -40,15 +40,15 @@ class App extends React.Component {
 
   constructor() {
     super();
-    this.handleLoadPosts = this.handleLoadPosts.bind(this);
-    this.getPostsToLoad = this.getPostsToLoad.bind(this);
-    this.loadPage = this.loadPage.bind(this);
-    this.loadPost = this.loadPost.bind(this);
+    this.getPage = this.getPage.bind(this);
+    this.getPageData = this.getPageData.bind(this);
     this.getPost = this.getPost.bind(this);
     this.getPostData = this.getPostData.bind(this);
     this.getPostOrdering = this.getPostOrdering.bind(this);
-    this.getPage = this.getPage.bind(this);
-    this.getPageData = this.getPageData.bind(this);
+    this.getPostsToLoad = this.getPostsToLoad.bind(this);
+    this.handleLoadPosts = this.handleLoadPosts.bind(this);
+    this.loadPage = this.loadPage.bind(this);
+    this.loadPost = this.loadPost.bind(this);
 
     const posts = loadMarkdown(
       importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=date,expected[]=title!../posts/', true, /\.md$/)),
@@ -76,31 +76,32 @@ class App extends React.Component {
       this.getPageData(key, this.loadPage));
   }
 
-  getPostData(key, handleReturn, handleError) {
-    return App.getData(key, this.state.posts, handleReturn, handleError);
+
+  getPage(key) {
+    return this.state.pages[key];
   }
 
   getPageData(key, handleReturn, handleError) {
     return App.getData(key, this.state.pages, handleReturn, handleError);
   }
 
-  getPage(key) {
-    return this.state.pages[key];
-  }
-
   getPost(key) {
     return this.state.posts[key];
+  }
+
+  getPostData(key, handleReturn, handleError) {
+    return App.getData(key, this.state.posts, handleReturn, handleError);
+  }
+
+  getPostOrdering(key1, key2) {
+    return (this.state.posts[key1].frontMatter.date <
+            this.state.posts[key2].frontMatter.date ? 1 : -1);
   }
 
   getPostsToLoad() {
     return Object.keys(this.state.posts)
       .filter(key => !this.state.posts[key].loaded && !this.state.posts[key].isLoading)
       .sort(this.getPostOrdering);
-  }
-
-  getPostOrdering(key1, key2) {
-    return (this.state.posts[key1].frontMatter.date <
-            this.state.posts[key2].frontMatter.date ? 1 : -1);
   }
 
   handleLoadPosts() {
