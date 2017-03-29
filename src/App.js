@@ -46,6 +46,7 @@ class App extends React.Component {
     this.getPostData = this.getPostData.bind(this);
     this.getPostOrdering = this.getPostOrdering.bind(this);
     this.getPostsToLoad = this.getPostsToLoad.bind(this);
+    this.handleNavbarFixed = this.handleNavbarFixed.bind(this);
     this.handleLoadPosts = this.handleLoadPosts.bind(this);
     this.loadPage = this.loadPage.bind(this);
     this.loadPost = this.loadPost.bind(this);
@@ -70,6 +71,7 @@ class App extends React.Component {
     this.state = {
       pages,
       posts,
+      contentClassname: 'content',
     };
 
     Object.keys(pages).forEach(key =>
@@ -102,6 +104,14 @@ class App extends React.Component {
     return Object.keys(this.state.posts)
       .filter(key => !this.state.posts[key].loaded && !this.state.posts[key].isLoading)
       .sort(this.getPostOrdering);
+  }
+
+  handleNavbarFixed(isFixed) {
+    if (isFixed) {
+      this.setState({ contentClassname: 'content-padded' });
+    } else {
+      this.setState({ contentClassname: 'content' });
+    }
   }
 
   handleLoadPosts() {
@@ -153,43 +163,46 @@ class App extends React.Component {
             description="This is the landing page description."
             pages={pages}
             getPage={this.getPage}
+            onNavbarFixed={this.handleNavbarFixed}
           />
-          <Switch>
+          <div className={this.state.contentClassname}>
+            <Switch>
 
-            <Route
-              path="/"
-              exact
-            >
-              <PostScroller
-                hasPostsToLoad={loadedPosts.length < Object.keys(this.state.posts).length}
-                onLoadPosts={this.handleLoadPosts}
-                posts={loadedPosts}
-                getPost={this.getPost}
-              />
-            </Route>
+              <Route
+                path="/"
+                exact
+              >
+                <PostScroller
+                  hasPostsToLoad={loadedPosts.length < Object.keys(this.state.posts).length}
+                  onLoadPosts={this.handleLoadPosts}
+                  posts={loadedPosts}
+                  getPost={this.getPost}
+                />
+              </Route>
 
-            <Route
-              path="/posts/:title"
-              component={({ match }) => {
-                if (match.params.title in this.state.posts) {
-                  if (!this.state.posts[match.params.title].body) {
-                    this.getPostData(match.params.title, this.loadPost);
+              <Route
+                path="/posts/:title"
+                component={({ match }) => {
+                  if (match.params.title in this.state.posts) {
+                    if (!this.state.posts[match.params.title].body) {
+                      this.getPostData(match.params.title, this.loadPost);
+                    }
+                    return (
+                      <Post
+                        title={this.state.posts[match.params.title].frontMatter.title}
+                        date={this.state.posts[match.params.title].frontMatter.date}
+                        body={this.state.posts[match.params.title].body}
+                      />);
                   }
-                  return (
-                    <Post
-                      title={this.state.posts[match.params.title].frontMatter.title}
-                      date={this.state.posts[match.params.title].frontMatter.date}
-                      body={this.state.posts[match.params.title].body}
-                    />);
-                }
-                return <NotFound />;
-              }}
-            />
+                  return <NotFound />;
+                }}
+              />
 
-            {pageRoutes}
+              {pageRoutes}
 
-            <Route component={NotFound} />
-          </Switch>
+              <Route component={NotFound} />
+            </Switch>
+          </div>
         </div>
       </BrowserRouter>
     );
