@@ -1,26 +1,76 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const Header = function render(props) {
-  const links = props.pages.map((key) => {
-    const page = props.getPage(key);
+class Header extends React.Component {
+  constructor() {
+    super();
+    this.handleViewChange = this.handleViewChange.bind(this);
+    this.state = {
+      navbarClass: 'navbar',
+    };
+  }
+
+  componentWillMount() {
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleViewChange);
+    window.addEventListener('resize', this.handleViewChange);
+    this.handleViewChange();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleViewChange);
+    window.removeEventListener('resize', this.handleViewChange);
+  }
+
+  handleViewChange() {
+    const navbarRect = this.navbar.getBoundingClientRect();
+    const headerRect = this.header.getBoundingClientRect();
+    if (navbarRect.top <= 0 && this.state.navbarClass === 'navbar') {
+      this.setState({ navbarClass: 'navbar-sticky' });
+      if (this.props.onNavbarFixed) {
+        this.props.onNavbarFixed(true);
+      }
+    } else if (navbarRect.top < headerRect.bottom && this.state.navbarClass === 'navbar-sticky') {
+      this.setState({ navbarClass: 'navbar' });
+      if (this.props.onNavbarFixed) {
+        this.props.onNavbarFixed(false);
+      }
+    }
+  }
+
+  render() {
+    const links = this.props.pages.map((key) => {
+      const page = this.props.getPage(key);
+      return (
+        <li key={key}><NavLink to={`/${key}`}>{page.frontMatter.title}</NavLink></li>
+      );
+    });
     return (
-      <li key={key}><NavLink to={key}>{page.frontMatter.title}</NavLink></li>
+      <div
+        className="header"
+        ref={(element) => { this.header = element; }}
+      >
+        <img className="avatar" src={this.props.avatar} alt={this.props.avatarAlt} />
+        <h1>{this.props.title}</h1>
+        <p>{this.props.description}</p>
+        <ul
+          className={this.state.navbarClass}
+          ref={(element) => { this.navbar = element; }}
+        >
+          <li key="Home"><NavLink to="/" exact>Home</NavLink></li>
+          {links}
+        </ul>
+      </div>
     );
-  });
-  return (
-    <div className="header">
-      <img className="avatar" src={props.avatar} alt={props.avatarAlt} />
-      <h1><Link to="/">{props.title}</Link></h1>
-      <p>{props.description}</p>
-      <ul>{links}</ul>
-    </div>
-  );
-};
+  }
+}
 
 Header.propTypes = {
   avatar: React.PropTypes.string.isRequired,
   avatarAlt: React.PropTypes.string.isRequired,
+  onNavbarFixed: React.PropTypes.func,
   title: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
   getPage: React.PropTypes.func.isRequired,
@@ -28,6 +78,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
+  onNavbarFixed: null,
   pages: [],
 };
 
