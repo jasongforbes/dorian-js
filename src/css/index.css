@@ -98,3 +98,46 @@ html,body {
 /*
 * Content
 */
+.inner-content {
+    padding: 1em;
+}
+
+@media (min-width: 58em) {
+  .inner-content {
+    padding: 1em 8em;
+  }
+}
+
+.inner-content a {
+  text-decoration: none;
+  color: #457B9D;
+}
+
+.inner-content a:hover {
+  text-decoration: underline;
+}
+
+.post-title {
+  color: #457B9D;
+  padding: 0;
+  margin: 0;
+  font-size: 150%;
+}
+
+.page h1 {
+  color: #457B9D;
+  padding: 0;
+  margin: 0;
+  font-size: 150%;
+}
+
+.post-date {
+  padding: 0;
+  margin: 0;
+  font-size: 80%;
+  color: #1D3557;
+}
+
+.post-summary {
+  padding: 0 0 1.5em;
+}

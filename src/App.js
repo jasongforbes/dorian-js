@@ -166,42 +166,44 @@ class App extends React.Component {
             onNavbarFixed={this.handleNavbarFixed}
           />
           <div className={this.state.contentClassname}>
-            <Switch>
+            <div className="inner-content">
+              <Switch>
 
-              <Route
-                path="/"
-                exact
-              >
-                <PostScroller
-                  hasPostsToLoad={loadedPosts.length < Object.keys(this.state.posts).length}
-                  onLoadPosts={this.handleLoadPosts}
-                  posts={loadedPosts}
-                  getPost={this.getPost}
-                />
-              </Route>
+                <Route
+                  path="/"
+                  exact
+                >
+                  <PostScroller
+                    hasPostsToLoad={loadedPosts.length < Object.keys(this.state.posts).length}
+                    onLoadPosts={this.handleLoadPosts}
+                    posts={loadedPosts}
+                    getPost={this.getPost}
+                  />
+                </Route>
 
-              <Route
-                path="/posts/:title"
-                component={({ match }) => {
-                  if (match.params.title in this.state.posts) {
-                    if (!this.state.posts[match.params.title].body) {
-                      this.getPostData(match.params.title, this.loadPost);
+                <Route
+                  path="/posts/:title"
+                  component={({ match }) => {
+                    if (match.params.title in this.state.posts) {
+                      if (!this.state.posts[match.params.title].body) {
+                        this.getPostData(match.params.title, this.loadPost);
+                      }
+                      return (
+                        <Post
+                          title={this.state.posts[match.params.title].frontMatter.title}
+                          date={this.state.posts[match.params.title].frontMatter.date}
+                          body={this.state.posts[match.params.title].body}
+                        />);
                     }
-                    return (
-                      <Post
-                        title={this.state.posts[match.params.title].frontMatter.title}
-                        date={this.state.posts[match.params.title].frontMatter.date}
-                        body={this.state.posts[match.params.title].body}
-                      />);
-                  }
-                  return <NotFound />;
-                }}
-              />
+                    return <NotFound />;
+                  }}
+                />
 
-              {pageRoutes}
+                {pageRoutes}
 
-              <Route component={NotFound} />
-            </Switch>
+                <Route component={NotFound} />
+              </Switch>
+            </div>
           </div>
         </div>
       </BrowserRouter>
