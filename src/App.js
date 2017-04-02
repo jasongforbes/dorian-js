@@ -116,7 +116,7 @@ class App extends React.Component {
   }
 
   handleLoadPosts() {
-    const numPostsToLoad = 1;
+    const numPostsToLoad = config.numPostsToLoad;
     const postsToLoad = this.getPostsToLoad();
     if (postsToLoad.length > 0) {
       postsToLoad.slice(0, numPostsToLoad).forEach((key) => {
