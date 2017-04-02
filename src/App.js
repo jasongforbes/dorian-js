@@ -7,6 +7,7 @@ import Page from './components/Page';
 import Post from './components/Post';
 import { importAll, loadMarkdown } from './utility';
 import avatar from '../images/avatar.svg';
+import config from './config.json';
 
 
 class App extends React.Component {
@@ -115,7 +116,7 @@ class App extends React.Component {
   }
 
   handleLoadPosts() {
-    const numPostsToLoad = 1;
+    const numPostsToLoad = config.numPostsToLoad;
     const postsToLoad = this.getPostsToLoad();
     if (postsToLoad.length > 0) {
       postsToLoad.slice(0, numPostsToLoad).forEach((key) => {
@@ -158,9 +159,9 @@ class App extends React.Component {
         <div className="app">
           <Header
             avatar={avatar}
-            avatarAlt="Default Image"
-            title="My Landing Page"
-            description="This is the landing page description."
+            avatarAlt={config.header.avatarAlt}
+            title={config.header.title}
+            description={config.header.description}
             pages={pages}
             getPage={this.getPage}
             onNavbarFixed={this.handleNavbarFixed}
