@@ -2,11 +2,24 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 class Header extends React.Component {
+  static renderPage(key, pageTitle) {
+    return (
+      <div className="col-md-auto" key={key}>
+        <NavLink
+          to={`/${key}`}
+          exact
+        >
+          {pageTitle}
+        </NavLink>
+      </div>
+    );
+  }
+
   constructor() {
     super();
     this.handleViewChange = this.handleViewChange.bind(this);
     this.state = {
-      navbarClass: 'navbar',
+      navbarClass: 'dorian-navbar',
     };
   }
 
@@ -27,13 +40,13 @@ class Header extends React.Component {
   handleViewChange() {
     const navbarRect = this.navbar.getBoundingClientRect();
     const headerRect = this.header.getBoundingClientRect();
-    if (navbarRect.top <= 0 && this.state.navbarClass === 'navbar') {
-      this.setState({ navbarClass: 'navbar-sticky' });
+    if (navbarRect.top <= 0 && this.state.navbarClass === 'dorian-navbar') {
+      this.setState({ navbarClass: 'dorian-navbar-sticky' });
       if (this.props.onNavbarFixed) {
         this.props.onNavbarFixed(true);
       }
-    } else if (navbarRect.top < headerRect.bottom && this.state.navbarClass === 'navbar-sticky') {
-      this.setState({ navbarClass: 'navbar' });
+    } else if (navbarRect.top < headerRect.bottom && this.state.navbarClass === 'dorian-navbar-sticky') {
+      this.setState({ navbarClass: 'dorian-navbar' });
       if (this.props.onNavbarFixed) {
         this.props.onNavbarFixed(false);
       }
@@ -41,27 +54,33 @@ class Header extends React.Component {
   }
 
   render() {
-    const links = this.props.pages.map((key) => {
-      const page = this.props.getPage(key);
-      return (
-        <li key={key}><NavLink to={`/${key}`}>{page.frontMatter.title}</NavLink></li>
-      );
-    });
+    const links = [Header.renderPage('', 'Home')]
+      .concat(this.props.pages.map(key =>
+        Header.renderPage(key, this.props.getPage(key).frontMatter.title)));
     return (
       <div
-        className="header"
+        className="header container-fluid"
         ref={(element) => { this.header = element; }}
       >
-        <img className="avatar" src={this.props.avatar} alt={this.props.avatarAlt} />
-        <h1>{this.props.title}</h1>
-        <p>{this.props.description}</p>
-        <ul
-          className={this.state.navbarClass}
-          ref={(element) => { this.navbar = element; }}
-        >
-          <li key="Home"><NavLink to="/" exact>Home</NavLink></li>
-          {links}
-        </ul>
+        <div className="row" >
+          <div className="col">
+            <img
+              className="rounded-circle avatar"
+              src={this.props.avatar}
+              alt={this.props.avatarAlt}
+            />
+            <h1>{this.props.title}</h1>
+            <p>{this.props.description}</p>
+            <div
+              className={`container ${this.state.navbarClass} dorian-nav`}
+              ref={(element) => { this.navbar = element; }}
+            >
+              <div className="row no-gutters">
+                {links}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
