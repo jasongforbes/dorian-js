@@ -1,49 +1,18 @@
 /*
-* Global resets
-*
-* Set font family and scale font by width of window.
-* Taken from https://github.com/poole/hyde/blob/master/public/css/hyde.css
-*/
-html {
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
-  font-size: 1em;
-}
-
-@media (min-width: 58em) {
-  html {
-    font-size: 1.25em;
-  }
-}
-
-html,body {
-  margin: 0;
-  padding: 0;
-}
-
-/*
 * Header styles
 */
 
 .header {
   top: 0;
-  width: 100%;
   background: #1D3557;
   color: #F1FAEE;
   text-align: center;
+  padding: 0;
 }
-
-.header h1 {
-  margin: 0em;
-}
-
-.header p {
-  margin-top: 1em;
-}
-
 
 .avatar {
-  width: 128px;
-  height: 128px;
+  width: 96px;
+  height: 96px;
   display: block;
   margin: auto;
 }
@@ -51,64 +20,72 @@ html,body {
 /*
 * Header Navigation
 */
-.header ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+
+.header .dorian-nav {
   background-color: #1D3557;
+  z-index: 100;
+  overflow: hidden;
+  width: 100%;
+  height: 3em;
 }
 
-.header .navbar {
-  height: 3em;
+.header .dorian-navbar-sticky {
+  position: fixed;
+  top: 0;
 }
 
 .content-padded {
   padding-top: 3em;
 }
 
-.header .navbar-sticky {
-  position: fixed;
-  top: 0;
-  height: 3em;
-  background: #1D3557;
-  width: 100%;
+/*
+* Header Navigation Link style
+*/
+
+.header .dorian-nav {
+  list-style-type: none;
 }
 
-.header ul li {
-  float: left;
-}
-
-.header ul li a {
-  display: block;
+.header .dorian-nav a {
+  display: flex;
   padding: 1em;
+  height: 3em;
   color: #F1FAEE;
-  text-align: center;
+  align-items: center;
   text-decoration: none;
 }
 
-.header ul li a:hover {
+.header .dorian-nav a:hover {
   background-color: #457B9D;
 }
 
-.header .active {
+.header .dorian-nav .active {
   background-color: #457B9D;
 }
 
 /*
 * Content
 */
+
 .inner-content {
-    padding: 1em;
+  color: #555;
 }
 
-@media (min-width: 58em) {
-  .inner-content {
-    padding: 1em 8em;
-  }
+.inner-content ::selection {
+  background-color: #A8DADC;
+}
+
+.inner-content h2 a {
+  text-decoration: none;
+  color: #457B9D;
 }
 
 .inner-content a {
+  text-decoration: none;
+  color: #457B9D;
+}
+
+.inner-content a:visited {
   text-decoration: none;
   color: #457B9D;
 }
@@ -117,27 +94,18 @@ html,body {
   text-decoration: underline;
 }
 
-.post-title {
+.inner-content h1 {
   color: #457B9D;
-  padding: 0;
-  margin: 0;
-  font-size: 150%;
 }
 
-.page h1 {
+.inner-content h2 {
   color: #457B9D;
-  padding: 0;
-  margin: 0;
-  font-size: 150%;
 }
 
-.post-date {
-  padding: 0;
-  margin: 0;
-  font-size: 80%;
-  color: #1D3557;
+.title {
+  color: #457B9D;
 }
 
-.post-summary {
-  padding: 0 0 1.5em;
+.date {
+  color: #888;
 }

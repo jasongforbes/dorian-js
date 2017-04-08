@@ -49,20 +49,22 @@ class PostScroller extends Component {
   renderPostSummary(key) {
     const post = this.props.getPost(key);
     return (
-      <div key={key}>
-        <PostSummary
-          title={post.frontMatter.title}
-          date={post.frontMatter.date}
-          body={post.body}
-          link={key}
-        />
+      <div key={key} className="row pb-3">
+        <div className="col">
+          <PostSummary
+            title={post.frontMatter.title}
+            date={post.frontMatter.date}
+            body={post.body}
+            link={key}
+          />
+        </div>
       </div>
     );
   }
 
   render() {
     return (
-      <div className="post-scroller">
+      <div className="post-scroller container-fluid">
         {this.props.posts.map(this.renderPostSummary)}
       </div>
     );
