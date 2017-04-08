@@ -167,7 +167,7 @@ class App extends React.Component {
             onNavbarFixed={this.handleNavbarFixed}
           />
           <div className={this.state.contentClassname}>
-            <div className="inner-content">
+            <div className="inner-content container pt-4">
               <Switch>
 
                 <Route

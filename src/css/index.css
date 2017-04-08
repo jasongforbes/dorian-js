@@ -44,8 +44,6 @@
 
 .header .dorian-nav {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 .header .dorian-nav a {
@@ -68,7 +66,26 @@
 /*
 * Content
 */
+
+.inner-content {
+  color: #555;
+}
+
+.inner-content ::selection {
+  background-color: #A8DADC;
+}
+
+.inner-content h2 a {
+  text-decoration: none;
+  color: #457B9D;
+}
+
 .inner-content a {
+  text-decoration: none;
+  color: #457B9D;
+}
+
+.inner-content a:visited {
   text-decoration: none;
   color: #457B9D;
 }
@@ -77,27 +94,18 @@
   text-decoration: underline;
 }
 
-.post-title {
+.inner-content h1 {
   color: #457B9D;
-  padding: 0;
-  margin: 0;
-  font-size: 150%;
 }
 
-.page h1 {
+.inner-content h2 {
   color: #457B9D;
-  padding: 0;
-  margin: 0;
-  font-size: 150%;
 }
 
-.post-date {
-  padding: 0;
-  margin: 0;
-  font-size: 80%;
-  color: #1D3557;
+.title {
+  color: #457B9D;
 }
 
-.post-summary {
-  padding: 0 0 1.5em;
+.date {
+  color: #888;
 }

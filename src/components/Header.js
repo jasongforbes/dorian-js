@@ -72,7 +72,7 @@ class Header extends React.Component {
             <h1>{this.props.title}</h1>
             <p>{this.props.description}</p>
             <div
-              className={`container ${this.state.navbarClass} dorian-nav`}
+              className={`container ${this.state.navbarClass} dorian-nav p-0 m-0`}
               ref={(element) => { this.navbar = element; }}
             >
               <div className="row no-gutters">

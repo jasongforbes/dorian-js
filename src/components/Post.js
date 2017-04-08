@@ -3,7 +3,7 @@ import PostHeader from './PostHeader';
 
 const Post = function render(props) {
   return (
-    <div className="post">
+    <div className="post container-fluid">
       <PostHeader
         title={props.title}
         date={props.date}

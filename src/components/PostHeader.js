@@ -7,9 +7,9 @@ const PostHeader = function render(props) {
     <Link to={`/posts/${props.link}`}>{props.title}</Link> :
     props.title;
   return (
-    <div className="post-headers">
-      <h2 className="post-title">{header}</h2>
-      <span className="post-date">{dateformat(new Date(props.date), 'dd mmm yyyy')}</span>
+    <div className="post-headers container">
+      <h2 className="title row mb-0">{header}</h2>
+      <span className="date row mb-1">{dateformat(new Date(props.date), 'dd mmm yyyy')}</span>
     </div>
   );
 };
