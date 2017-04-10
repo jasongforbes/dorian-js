@@ -2,6 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 class Header extends React.Component {
+  static generateLink(key, path, text) {
+    return <li key={`${key}`}><NavLink to={`${path}`} exact>{`${text}`}</NavLink></li>;
+  }
+
   constructor() {
     super();
     this.handleViewChange = this.handleViewChange.bind(this);
@@ -41,25 +45,26 @@ class Header extends React.Component {
   }
 
   render() {
-    const links = this.props.pages.map((key) => {
-      const page = this.props.getPage(key);
-      return (
-        <li key={key}><NavLink to={`/${key}`}>{page.frontMatter.title}</NavLink></li>
-      );
-    });
+    const links = [Header.generateLink('Home', '/', 'Home')]
+      .concat(this.props.pages.map((key) => {
+        const page = this.props.getPage(key);
+        return Header.generateLink(key, `/${key}`, page.frontMatter.title);
+      }));
+
     return (
       <div
         className="header"
         ref={(element) => { this.header = element; }}
       >
-        <img className="avatar" src={this.props.avatar} alt={this.props.avatarAlt} />
-        <h1>{this.props.title}</h1>
-        <p>{this.props.description}</p>
+        <div className="header-content">
+          <img className="avatar" src={this.props.avatar} alt={this.props.avatarAlt} />
+          <h1>{this.props.title}</h1>
+          <p>{this.props.description}</p>
+        </div>
         <ul
           className={this.state.navbarClass}
           ref={(element) => { this.navbar = element; }}
         >
-          <li key="Home"><NavLink to="/" exact>Home</NavLink></li>
           {links}
         </ul>
       </div>
