@@ -60,13 +60,13 @@ class Header extends React.Component {
           <img className="avatar" src={this.props.avatar} alt={this.props.avatarAlt} />
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
+          <ul
+            className={`nav ${this.state.navbarClass}`}
+            ref={(element) => { this.navbar = element; }}
+          >
+            {links}
+          </ul>
         </div>
-        <ul
-          className={this.state.navbarClass}
-          ref={(element) => { this.navbar = element; }}
-        >
-          {links}
-        </ul>
       </div>
     );
   }
