@@ -1,6 +1,6 @@
 html {
   font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 html,body {
@@ -10,7 +10,7 @@ html,body {
 }
 
 .app {
-  min-height: 100vh;
+  min-height: 101vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,11 +30,10 @@ html,body {
 .header {
   top: 0;
   width: 100%;
-  background: #0288d1;
-  color: #e1f5fe;
+  background: #0277bd;
+  color: #fff;
   display: flex;
   justify-content: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .header-content {
@@ -67,13 +66,14 @@ html,body {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  background-color: #5eb8ff
+  background-color: #58a5f0
 ;
   align-items: stretch;
   list-style-type: none;
   margin: 0;
   padding: 0;
   height: 3em;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .content-padded {
@@ -87,7 +87,7 @@ html,body {
 }
 
 .nav a {
-  color: #424242;
+  color: #333333;
   font-weight: bold;
   flex: 1;
   text-decoration: none;
@@ -100,11 +100,11 @@ html,body {
 
 .nav a:hover {
   border-radius: 8px 8px 0 0;
-  color: #212121;
+  color: #111111;
 }
 
 .nav .active {
-  border-bottom: 4px solid #0288d1;
+  border-bottom: 4px solid #0277bd;
   padding: 0px;
 }
 
@@ -112,17 +112,40 @@ html,body {
 .navbar-sticky {
   position: fixed;
   top: 0;
-  width: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
 /*
 * Content
 */
-.inner-content {
-    padding: 1em;
+.content {
     flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.inner-content {
+  display: flex;
+  flex: 0 1 1000px;
+  flex-direction: column;
+  padding: 1em;
+}
+
+/*
+* Post-scroller
+*/
+.post-scroller {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-summary {
+  padding: 0em;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 0px -1px rgba(0, 0, 0, 0.2), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+  display: flex;
+  min-height: 200px;
 }
 
 .inner-content a {
@@ -153,8 +176,4 @@ html,body {
   margin: 0;
   font-size: 80%;
   color: #1D3557;
-}
-
-.post-summary {
-  padding: 0 0 1.5em;
 }
