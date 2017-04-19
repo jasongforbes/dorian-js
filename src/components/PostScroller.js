@@ -49,14 +49,15 @@ class PostScroller extends Component {
   renderPostSummary(key) {
     const post = this.props.getPost(key);
     return (
-      <div key={key}>
-        <PostSummary
-          title={post.frontMatter.title}
-          date={post.frontMatter.date}
-          body={post.body}
-          link={key}
-        />
-      </div>
+      <PostSummary
+        key={key}
+        title={post.frontMatter.title}
+        date={post.frontMatter.date}
+        body={post.body}
+        link={`posts/${key}`}
+        bannerUrl={post.frontMatter.banner}
+        description={post.frontMatter.description}
+      />
     );
   }
 

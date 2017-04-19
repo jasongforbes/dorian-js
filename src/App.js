@@ -52,6 +52,8 @@ class App extends React.Component {
     this.loadPage = this.loadPage.bind(this);
     this.loadPost = this.loadPost.bind(this);
 
+    importAll(require.context('!file?name=media/images/[name].[ext]!../images/', true, /\..*$/));
+
     const posts = loadMarkdown(
       importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=date,expected[]=title!../posts/', true, /\.md$/)),
       importAll(require.context('!file?name=media/posts/[name].[hash].html!./loaders/markdown-loader!../posts/', true, /\.md$/)),

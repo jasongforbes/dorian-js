@@ -27,6 +27,8 @@ Posts are written in markdown, with a required YAML header for supplying meta-da
 ---
 title: Test Post
 date: 2017-03-02
+banner: ./media/images/test-post-banner.jpg
+description: This is a test post.
 ---
 
 Content goes here
@@ -34,6 +36,10 @@ Content goes here
 ```
 
 As seen above, the meta-data is seperated from the post body using three dashes. The two required fields in the YAML frontmatter are "Title", which appears as a h2 tag in the html, and date. The date (or date-time if higher precision is required) is also used for sorting the posts from newest to oldest.
+
+The banner field inputs an image in the post-summary and post. In the example above, the image is found locally in the ./media/images/ directory. This directory is loaded from ./public/images on build.
+
+The description field is an optional field to provide a short synopsis of the post.
 
 The required fields can be adjusted in [App.js](App.js) where they are defined in the importAll call.
 
