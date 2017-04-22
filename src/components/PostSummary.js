@@ -4,7 +4,7 @@ import PostHeader from './PostHeader';
 
 const PostSummary = function render(props) {
   return (
-    <div className="post-summary">
+    <div className="post-summary content-card">
       {props.bannerUrl &&
         <div className="banner" style={{ backgroundImage: `url(${props.bannerUrl})` }} >
           <Link to={props.link} />

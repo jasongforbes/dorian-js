@@ -132,23 +132,6 @@ html,body {
   padding: 1em;
 }
 
-/*
-* Post-scroller
-*/
-.post-scroller {
-  display: flex;
-  flex-direction: column;
-}
-
-.post-summary {
-  padding: 0em;
-  border-radius: 4px;
-  background-color: white;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 0px -1px rgba(0, 0, 0, 0.2), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
-  display: flex;
-  min-height: 400px;
-}
-
 .inner-content a {
   text-decoration: none;
   color: #457B9D;
@@ -158,9 +141,25 @@ html,body {
   text-decoration: none;
 }
 
+.content-card {
+  padding: 0em;
+  margin: 0.5em 0em;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 0px -1px rgba(0, 0, 0, 0.2), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+  min-height: 400px;
+}
+
+/*
+* Post-scroller
+*/
+.post-scroller {
+  display: flex;
+  flex-direction: column;
+}
+
 .post-summary {
   display: flex;
-  margin: 0.5em 0em;
 }
 
 .post-summary .banner {
@@ -198,4 +197,20 @@ html,body {
   margin: 0;
   font-size: 0.66em;
   color: #999999;
+}
+
+/*
+* Posts
+*/
+.post {
+  padding: 1em;
+}
+
+.post .banner{
+  width: 100%;
+  min-height: 400px;
+  height: auto;
+	background-size: cover;
+  background-position: 50% 50%;
+  margin: 1em 0em;
 }

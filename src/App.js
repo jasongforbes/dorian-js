@@ -195,6 +195,7 @@ class App extends React.Component {
                           title={this.state.posts[match.params.title].frontMatter.title}
                           date={this.state.posts[match.params.title].frontMatter.date}
                           body={this.state.posts[match.params.title].body}
+                          bannerUrl={this.state.posts[match.params.title].frontMatter.banner}
                         />);
                     }
                     return <NotFound />;
