@@ -214,3 +214,10 @@ html,body {
   background-position: 50% 50%;
   margin: 1em 0em;
 }
+
+/*
+* Pages
+*/
+.page {
+  padding: 1em;
+}
