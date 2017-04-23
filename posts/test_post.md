@@ -2,7 +2,7 @@
 title: Test Post
 date: 2017-03-02
 description: This is a test post.
-banner: ./media/images/test-post-banner.jpg
+banner: media/images/test-post-banner.jpg
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue sem, bibendum nec varius nec, convallis ut quam. Pellentesque volutpat nulla nec diam pulvinar maximus. Aliquam sit amet convallis odio. Duis volutpat nec velit sit amet posuere. Integer nec felis mi. Sed viverra nisl turpis, vel laoreet sem mollis quis. Aliquam erat volutpat. Vivamus feugiat cursus venenatis. [Sed](https://github.com/jasongforbes/dorian-js) condimentum dapibus consectetur. Nam et lectus ac dolor viverra tristique. Suspendisse vel molestie ex.

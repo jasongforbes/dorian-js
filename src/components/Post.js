@@ -1,4 +1,5 @@
 import React from 'react';
+import BackgroundImage from './BackgroundImage';
 import PostHeader from './PostHeader';
 
 const Post = function render(props) {
@@ -8,9 +9,14 @@ const Post = function render(props) {
         title={props.title}
         date={props.date}
       />
-      {props.bannerUrl &&
-        <div className="banner" style={{ backgroundImage: `url(../${props.bannerUrl})` }} />
-      }     
+      {props.banner &&
+        <div className="banner">
+          <BackgroundImage
+            className="banner"
+            url={props.banner}
+          />
+        </div>
+      }
       <div
         className="post-body"
         dangerouslySetInnerHTML={{ __html: props.body }} // eslint-disable-line react/no-danger
@@ -22,13 +28,13 @@ const Post = function render(props) {
 Post.propTypes = {
   title: React.PropTypes.string.isRequired,
   date: React.PropTypes.string.isRequired,
-  bannerUrl: React.PropTypes.string,
+  banner: React.PropTypes.string,
   body: React.PropTypes.string,
 };
 
 Post.defaultProps = {
   body: '',
-  bannerUrl: null,
+  banner: null,
 };
 
 export default Post;

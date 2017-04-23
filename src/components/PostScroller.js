@@ -55,7 +55,7 @@ class PostScroller extends Component {
         date={post.frontMatter.date}
         body={post.body}
         link={`posts/${key}`}
-        bannerUrl={post.frontMatter.banner}
+        banner={post.frontMatter.banner}
         description={post.frontMatter.description}
       />
     );

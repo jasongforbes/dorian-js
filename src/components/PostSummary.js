@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BackgroundImage from './BackgroundImage';
 import PostHeader from './PostHeader';
 
 const PostSummary = function render(props) {
   return (
     <div className="post-summary content-card">
-      {props.bannerUrl &&
-        <div className="banner" style={{ backgroundImage: `url(${props.bannerUrl})` }} >
-          <Link to={props.link} />
+      {props.banner &&
+        <div className="banner">
+          <BackgroundImage
+            url={props.banner}
+          >
+            <Link to={props.link} />
+          </BackgroundImage>
         </div>
       }
       <div className="summary-text">
@@ -27,13 +32,13 @@ PostSummary.propTypes = {
   title: React.PropTypes.string.isRequired,
   date: React.PropTypes.string.isRequired,
   link: React.PropTypes.string.isRequired,
-  bannerUrl: React.PropTypes.string,
+  banner: React.PropTypes.string,
   description: React.PropTypes.string,
 };
 
 PostSummary.defaultProps = {
   description: '',
-  bannerUrl: null,
+  banner: null,
 };
 
 export default PostSummary;
