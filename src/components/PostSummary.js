@@ -1,18 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PostHeader from './PostHeader';
 
 const PostSummary = function render(props) {
   return (
-    <div className="post-summary">
-      <PostHeader
-        link={props.link}
-        title={props.title}
-        date={props.date}
-      />
-      <div
-        className="post-preview"
-        dangerouslySetInnerHTML={{ __html: props.body }} // eslint-disable-line react/no-danger
-      />
+    <div className="post-summary content-card">
+      {props.bannerUrl &&
+        <div className="banner" style={{ backgroundImage: `url(${props.bannerUrl})` }} >
+          <Link to={props.link} />
+        </div>
+      }
+      <div className="summary-text">
+        <Link to={props.link}>
+          <PostHeader
+            title={props.title}
+            date={props.date}
+          />
+          <p>{props.description}</p>
+        </Link>
+      </div>
     </div>
   );
 };
@@ -20,8 +26,14 @@ const PostSummary = function render(props) {
 PostSummary.propTypes = {
   title: React.PropTypes.string.isRequired,
   date: React.PropTypes.string.isRequired,
-  body: React.PropTypes.string.isRequired,
   link: React.PropTypes.string.isRequired,
+  bannerUrl: React.PropTypes.string,
+  description: React.PropTypes.string,
+};
+
+PostSummary.defaultProps = {
+  description: '',
+  bannerUrl: null,
 };
 
 export default PostSummary;

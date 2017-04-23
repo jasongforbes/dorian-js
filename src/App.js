@@ -52,6 +52,8 @@ class App extends React.Component {
     this.loadPage = this.loadPage.bind(this);
     this.loadPost = this.loadPost.bind(this);
 
+    importAll(require.context('!file?name=media/images/[name].[ext]!../images/', true, /\..*$/));
+
     const posts = loadMarkdown(
       importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=date,expected[]=title!../posts/', true, /\.md$/)),
       importAll(require.context('!file?name=media/posts/[name].[hash].html!./loaders/markdown-loader!../posts/', true, /\.md$/)),
@@ -111,7 +113,7 @@ class App extends React.Component {
     if (isFixed) {
       this.setState({ contentClassname: 'content-padded' });
     } else {
-      this.setState({ contentClassname: 'content' });
+      this.setState({ contentClassname: 'content-nonpadded' });
     }
   }
 
@@ -166,10 +168,9 @@ class App extends React.Component {
             getPage={this.getPage}
             onNavbarFixed={this.handleNavbarFixed}
           />
-          <div className={this.state.contentClassname}>
-            <div className="inner-content">
+          <div className={`content ${this.state.contentClassname}`}>
+            <div className="inner-content" >
               <Switch>
-
                 <Route
                   path="/"
                   exact
@@ -194,6 +195,7 @@ class App extends React.Component {
                           title={this.state.posts[match.params.title].frontMatter.title}
                           date={this.state.posts[match.params.title].frontMatter.date}
                           body={this.state.posts[match.params.title].body}
+                          bannerUrl={this.state.posts[match.params.title].frontMatter.banner}
                         />);
                     }
                     return <NotFound />;
@@ -205,6 +207,9 @@ class App extends React.Component {
                 <Route component={NotFound} />
               </Switch>
             </div>
+          </div>
+          <div className="footer">
+            <span>{config.footer.text}</span>
           </div>
         </div>
       </BrowserRouter>

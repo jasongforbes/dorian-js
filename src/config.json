@@ -4,5 +4,8 @@
     "description": "This is the landing page description.",
     "avatarAlt": "Default Image."
   },
-  "numPostsToLoad": "3"
+  "numPostsToLoad": "3",
+  "footer": {
+    "text": "Copyright © 2017 Jason Forbes"
+  }
 }
