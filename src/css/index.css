@@ -88,6 +88,7 @@ html,body {
   margin: 0;
   padding: 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  z-index: 10;
 }
 
 .nav li {
@@ -185,10 +186,19 @@ and (min-width : 460px) {
 
 .post-summary .banner {
   flex: 0 1 66%;
-  border-radius: 4px 0px 0px 4px;
   max-height: 100%;
-	background-size: cover;
+}
+
+.banner div {
+  height: 100%;
+  width: 100%;
+}
+
+.post-summary .background-image {
+  border-radius: 4px 0px 0px 4px;
+  background-size: cover;
   overflow: 'hidden';
+  max-height: 100%;
   background-position: 50% 50%;
 }
 
@@ -201,7 +211,12 @@ and (max-width : 800px) {
   .post-summary .banner {
     max-height: auto;
     max-width: 100%;
-    flex: 0 0 200px;
+    flex: 0 0;
+  }
+
+  .post-summary .background-image {
+    height: 200px;
+    border-radius: 4px 4px 0px 0px;
   }
 }
 
@@ -240,13 +255,19 @@ and (max-width : 800px) {
   padding: 1em;
 }
 
-.post .banner{
+.post .banner {
+  min-height: 400px;
+  width: 100%;
+  margin: 1em 0em;
+  height: auto;
+}
+
+.post .background-image {
   width: 100%;
   min-height: 400px;
   height: auto;
-	background-size: cover;
+  background-size: cover;
   background-position: 50% 50%;
-  margin: 1em 0em;
 }
 
 /*
@@ -254,4 +275,41 @@ and (max-width : 800px) {
 */
 .page {
   padding: 1em;
+}
+
+/*
+* BackgroundImage
+*/
+
+.sharpen-transition-group {
+  position: relative;
+  min-height: 400px;
+}
+
+@media only screen
+and (max-width : 800px) {
+  .sharpen-transition-group {
+    min-height: 200px;
+  }
+}
+
+.sharpen-enter {
+  position: absolute;
+}
+
+.sharpen-enter.sharpen-enter-active {
+  z-index: 2;
+  position: absolute;
+}
+
+.sharpen-leave {
+  position: absolute;
+  opacity: 1;
+}
+
+.sharpen-leave.sharpen-leave-active {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+  position: absolute;
+  z-index: 3;
 }

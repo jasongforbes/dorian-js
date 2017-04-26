@@ -41,6 +41,7 @@ class App extends React.Component {
 
   constructor() {
     super();
+    this.getImage = this.getImage.bind(this);
     this.getPage = this.getPage.bind(this);
     this.getPageData = this.getPageData.bind(this);
     this.getPost = this.getPost.bind(this);
@@ -52,7 +53,18 @@ class App extends React.Component {
     this.loadPage = this.loadPage.bind(this);
     this.loadPost = this.loadPost.bind(this);
 
-    importAll(require.context('!file?name=media/images/[name].[ext]!../images/', true, /\..*$/));
+    const imageUrls = importAll(require.context('!json!./loaders/image-loader?path=media/images/&resizeWidth[]=1000&placeholder!../images/', true, /\.(jpe?g|png)$/));
+    const images = imageUrls.reduce((imagesPaths, image) => {
+      const imagesPathsCopy = imagesPaths;
+      imagesPathsCopy[image.baseUrl] = {
+        placeholder: image.placeholder,
+        standard: image.w1000px,
+        img: new Image(),
+        displayImage: image.placeholder,
+        loaded: false,
+      };
+      return imagesPathsCopy;
+    }, {});
 
     const posts = loadMarkdown(
       importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=date,expected[]=title!../posts/', true, /\.md$/)),
@@ -74,6 +86,7 @@ class App extends React.Component {
     this.state = {
       pages,
       posts,
+      images,
       contentClassname: 'content',
     };
 
@@ -81,6 +94,22 @@ class App extends React.Component {
       this.getPageData(key, this.loadPage));
   }
 
+  getImage(url) {
+    const image = this.state.images[url];
+    if (image) {
+      if (!image.loaded) {
+        image.img.onload = () => {
+          const images = this.state.images;
+          images[url].loaded = true;
+          images[url].displayImage = image.standard;
+          this.setState({ images });
+        };
+        image.img.src = image.standard;
+      }
+      return image.displayImage;
+    }
+    return null;
+  }
 
   getPage(key) {
     return this.state.pages[key];
@@ -180,6 +209,7 @@ class App extends React.Component {
                     onLoadPosts={this.handleLoadPosts}
                     posts={loadedPosts}
                     getPost={this.getPost}
+                    getImage={this.getImage}
                   />
                 </Route>
 
@@ -195,7 +225,8 @@ class App extends React.Component {
                           title={this.state.posts[match.params.title].frontMatter.title}
                           date={this.state.posts[match.params.title].frontMatter.date}
                           body={this.state.posts[match.params.title].body}
-                          bannerUrl={this.state.posts[match.params.title].frontMatter.banner}
+                          banner={this.getImage(
+                            this.state.posts[match.params.title].frontMatter.banner)}
                         />);
                     }
                     return <NotFound />;
