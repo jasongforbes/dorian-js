@@ -55,7 +55,7 @@ class PostScroller extends Component {
         date={post.frontMatter.date}
         body={post.body}
         link={`posts/${key}`}
-        banner={post.frontMatter.banner}
+        banner={this.props.getImage(post.frontMatter.banner)}
         description={post.frontMatter.description}
       />
     );
@@ -74,6 +74,7 @@ PostScroller.propTypes = {
   hasPostsToLoad: React.PropTypes.bool.isRequired,
   onLoadPosts: React.PropTypes.func.isRequired,
   posts: React.PropTypes.array.isRequired,
+  getImage: React.PropTypes.func.isRequired,
   getPost: React.PropTypes.func.isRequired,
 };
 

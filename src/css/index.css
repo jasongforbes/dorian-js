@@ -216,6 +216,7 @@ and (max-width : 800px) {
 
   .post-summary .background-image {
     height: 200px;
+    border-radius: 4px 4px 0px 0px;
   }
 }
 
@@ -282,6 +283,18 @@ and (max-width : 800px) {
 
 .sharpen-transition-group {
   position: relative;
+  min-height: 400px;
+}
+
+@media only screen
+and (max-width : 800px) {
+  .sharpen-transition-group {
+    min-height: 200px;
+  }
+}
+
+.sharpen-enter {
+  position: absolute;
 }
 
 .sharpen-enter.sharpen-enter-active {
@@ -290,6 +303,7 @@ and (max-width : 800px) {
 }
 
 .sharpen-leave {
+  position: absolute;
   opacity: 1;
 }
 
