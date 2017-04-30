@@ -1,6 +1,6 @@
 # Dorian.js
 
-This project is a simple blogging platform which converts user written mardown files into HTML and is available via the MIT OpenSource License.
+This project is a simple blogging platform which converts user written markdown files into HTML and is available via the MIT OpenSource License.
 
 One of the goals of this project is to provide a simple use-case for learning react-js and basic web-development. The aim was to make this project extensible while retaining simplicity.
 
