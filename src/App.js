@@ -80,8 +80,7 @@ class App extends React.Component {
 
     const pages = loadMarkdown(
       importAll(require.context('!json!./loaders/frontmatter-loader?expected[]=title,expected[]=order!../pages/', true, /\.md$/)),
-      importAll(require.context('!file?name=media/pages/[name].[hash].html!./loaders/markdown-loader!../pages/', true, /\.md$/)),
-    );
+      importAll(require.context('!file?name=media/pages/[name].[hash].html!./loaders/markdown-loader!../pages/', true, /\.md$/)));
 
     this.state = {
       pages,
@@ -172,7 +171,7 @@ class App extends React.Component {
       .filter(key => this.state.posts[key].loaded)
       .sort(this.getPostOrdering);
     const pages = Object.keys(this.state.pages)
-      .sort((a, b) => this.getPage(a).frontMatter.order < this.getPage(b).frontMatter.order);
+      .sort((a, b) => this.getPage(a).frontMatter.order > this.getPage(b).frontMatter.order);
     const pageRoutes = pages.map(key => (
       <Route
         key={key}
