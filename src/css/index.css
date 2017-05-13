@@ -265,6 +265,10 @@ and (max-width : 800px) {
   height: auto;
 }
 
+.post-body {
+  overflow: hidden;
+}
+
 .post .background-image {
   width: 100%;
   min-height: 400px;
@@ -273,6 +277,19 @@ and (max-width : 800px) {
   background-position: 50% 50%;
 }
 
+.markdown-body pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */;
+}
+
+.markdown-body pre code {
+  overflow-wrap: normal;
+  white-space:pre-wrap;
+  overflow: auto;
+}
 /*
 * Pages
 */
