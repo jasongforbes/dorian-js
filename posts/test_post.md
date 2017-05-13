@@ -7,6 +7,10 @@ banner: media/images/test-post-banner.jpg
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue sem, bibendum nec varius nec, convallis ut quam. Pellentesque volutpat nulla nec diam pulvinar maximus. Aliquam sit amet convallis odio. Duis volutpat nec velit sit amet posuere. Integer nec felis mi. Sed viverra nisl turpis, vel laoreet sem mollis quis. Aliquam erat volutpat. Vivamus feugiat cursus venenatis. [Sed](https://github.com/jasongforbes/dorian-js) condimentum dapibus consectetur. Nam et lectus ac dolor viverra tristique. Suspendisse vel molestie ex.
 
+<div class="inline-html">
+this is an inner tag
+</div>
+
 Cras eget dui tincidunt, vulputate nisi nec, dictum tortor. Donec ut ex porttitor, rutrum nunc quis, posuere dolor. Morbi quam nunc, mollis ac libero sed, congue vulputate neque. Nullam nec enim velit. Pellentesque tristique eros elit. Vestibulum non justo sollicitudin, venenatis arcu non, porta ligula. Suspendisse vel nisl metus. Curabitur vitae massa id sem commodo vehicula luctus tempus dolor. Duis tempor at lorem aliquet fringilla. Phasellus dapibus vehicula leo eu iaculis. In tempor venenatis ultricies. Proin vitae ante et magna dictum ultrices. Ut vel sapien id ligula consequat dictum eu sit amet mauris.
 
 Donec porta est nibh. Suspendisse sed euismod metus. Etiam tincidunt neque condimentum nisi efficitur sollicitudin. Ut in orci purus. Quisque gravida, nulla eget pretium tempor, ex metus semper tortor, nec pulvinar lectus sem id dui. Donec urna dui, hendrerit egestas massa tincidunt, vulputate faucibus velit. Phasellus libero metus, malesuada id justo et, bibendum varius massa. Morbi volutpat purus odio, quis vehicula risus imperdiet maximus. Integer gravida ut ex quis dapibus. Curabitur non ligula cursus, placerat lacus eu, sagittis dui.
