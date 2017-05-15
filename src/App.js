@@ -13,7 +13,7 @@ import config from './config.json';
 class App extends React.Component {
   static getData(key, collection, handleReturn, handleError) {
     if (collection[key].body) {
-      handleReturn(key, collection.posts[key].body);
+      handleReturn(key, collection[key].body);
     }
     const request = new XMLHttpRequest();
     request.onreadystatechange = () => {
@@ -103,7 +103,7 @@ class App extends React.Component {
           images[url].displayImage = image.standard;
           this.setState({ images });
         };
-        image.img.src = image.standard;
+        image.img.src = `${config.domainName}/${image.standard}`;
       }
       return image.displayImage;
     }
