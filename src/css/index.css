@@ -1,3 +1,6 @@
+@import url("../../node_modules/github-markdown-css/github-markdown.css");
+@import url("../../node_modules/highlight.js/styles/atom-one-light.css");
+
 html {
   font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
   font-size: 18px;
@@ -152,6 +155,7 @@ and (min-width : 460px) {
   flex: 0 1 1000px;
   flex-direction: column;
   padding: 1em;
+  overflow: hidden;
 }
 
 .inner-content a {
@@ -268,6 +272,10 @@ and (max-width : 800px) {
   height: auto;
   background-size: cover;
   background-position: 50% 50%;
+}
+
+.post-body {
+  display: block;
 }
 
 /*

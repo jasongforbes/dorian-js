@@ -18,7 +18,7 @@ const Post = function render(props) {
         </div>
       }
       <div
-        className="post-body"
+        className="post-body markdown-body"
         dangerouslySetInnerHTML={{ __html: props.body }} // eslint-disable-line react/no-danger
       />
     </div>
