@@ -54,7 +54,7 @@ class PostScroller extends Component {
         title={post.frontMatter.title}
         date={post.frontMatter.date}
         body={post.body}
-        link={`posts/${key}`}
+        link={`/posts/${key}`}
         banner={this.props.getImage(post.frontMatter.banner)}
         description={post.frontMatter.description}
       />
