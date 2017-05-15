@@ -53,7 +53,7 @@ class App extends React.Component {
     this.loadPage = this.loadPage.bind(this);
     this.loadPost = this.loadPost.bind(this);
 
-    const imageUrls = importAll(require.context('!json!./loaders/image-loader?path=media/images/&resizeWidth[]=1000&placeholder!../images/', true, /\.(jpe?g|png)$/));
+    const imageUrls = importAll(require.context('!json!./loaders/image-loader?path=/media/images/&resizeWidth[]=1000&placeholder!../images/', true, /\.(jpe?g|png)$/));
     const images = imageUrls.reduce((imagesPaths, image) => {
       const imagesPathsCopy = imagesPaths;
       imagesPathsCopy[image.baseUrl] = {
