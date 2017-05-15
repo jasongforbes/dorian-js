@@ -47,26 +47,19 @@ html,body {
 */
 
 .header {
-  top: 0;
   width: 100%;
   background: #0277bd;
   color: #fff;
-  display: flex;
-  justify-content: center;
-}
-
-.header-content {
-  width: 100%;
   display: flex;
   text-align: center;
   flex-direction: column;
 }
 
-.header-content h1 {
+.header h1 {
   margin: 0em;
 }
 
-.header-content p {
+.header p {
   margin-top: 1em;
 }
 
@@ -81,8 +74,14 @@ html,body {
 * Header Navigation
 */
 
+.nav-container {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}
+
 .nav {
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   background-color: #58a5f0;
@@ -91,7 +90,6 @@ html,body {
   margin: 0;
   padding: 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  z-index: 10;
 }
 
 .nav li {
@@ -126,18 +124,6 @@ html,body {
 and (max-width : 800px) {
   .nav li {
     flex: 0 1 25%;
-  }
-}
-
-@media only screen
-and (min-width : 460px) {
-  .navbar-sticky {
-    position: fixed;
-    top: 0;
-  }
-
-  .content-padded {
-    padding-top: calc(3em + 7px);
   }
 }
 
