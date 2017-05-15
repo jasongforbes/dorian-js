@@ -37,12 +37,12 @@ Content goes here
 
 As seen above, the meta-data is seperated from the post body using three dashes. The two required fields in the YAML frontmatter are "Title", which appears as a h2 tag in the html, and date. The date (or date-time if higher precision is required) is also used for sorting the posts from newest to oldest.
 
-The banner field inputs an image in the post-summary and post. In the example above, the image is found locally in the media/images/ directory. This directory is loaded from ./public/images on build.
+The banner field inputs an image in the post-summary and post. In the example above, the image is found locally in the /media/images/ directory. This directory is loaded from ./public/images on build.
 
 Images are scaled using the image-loader. and the scaled images are placed in the build directory. This can be customized in the [App.js](App.js) importAll statement.
 
 ```js
-importAll(require.context('!json!./loaders/image-loader?path=media/images/&resizeWidth[]=1000&placeholder!../images/', true, /\.(jpe?g|png)$/));
+importAll(require.context('!json!./loaders/image-loader?path=/media/images/&resizeWidth[]=1000&placeholder!../images/', true, /\.(jpe?g|png)$/));
 ```
 
 The description field is an optional field to provide a short synopsis of the post.

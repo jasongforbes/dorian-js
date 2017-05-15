@@ -13,7 +13,7 @@ const BackgroundImage = function render(props) {
       <div
         className="background-image"
         key={props.url}
-        style={{ backgroundImage: `url(../${props.url})` }}
+        style={{ backgroundImage: `url(/${props.url})` }}
       >
         {props.children}
       </div>

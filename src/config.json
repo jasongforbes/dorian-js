@@ -4,6 +4,7 @@
     "description": "This is the landing page description.",
     "avatarAlt": "Default Image."
   },
+  "domainName": "http://localhost:3000",
   "numPostsToLoad": "3",
   "footer": {
     "text": "Copyright © 2017 Jason Forbes"

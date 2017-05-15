@@ -102,8 +102,9 @@ class App extends React.Component {
           images[url].loaded = true;
           images[url].displayImage = image.standard;
           this.setState({ images });
+          console.log(image)
         };
-        image.img.src = image.standard;
+        image.img.src = `${config.domainName}/${image.standard}`;
       }
       return image.displayImage;
     }
