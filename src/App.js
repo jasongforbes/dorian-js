@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import PostScroller from './components/PostScroller';
+import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
 import Page from './components/Page';
 import Post from './components/Post';
@@ -48,7 +49,6 @@ class App extends React.Component {
     this.getPostData = this.getPostData.bind(this);
     this.getPostOrdering = this.getPostOrdering.bind(this);
     this.getPostsToLoad = this.getPostsToLoad.bind(this);
-    this.handleNavbarFixed = this.handleNavbarFixed.bind(this);
     this.handleLoadPosts = this.handleLoadPosts.bind(this);
     this.loadPage = this.loadPage.bind(this);
     this.loadPost = this.loadPost.bind(this);
@@ -86,7 +86,6 @@ class App extends React.Component {
       pages,
       posts,
       images,
-      contentClassname: 'content',
     };
 
     Object.keys(pages).forEach(key =>
@@ -137,14 +136,6 @@ class App extends React.Component {
       .sort(this.getPostOrdering);
   }
 
-  handleNavbarFixed(isFixed) {
-    if (isFixed) {
-      this.setState({ contentClassname: 'content-padded' });
-    } else {
-      this.setState({ contentClassname: 'content-nonpadded' });
-    }
-  }
-
   handleLoadPosts() {
     const numPostsToLoad = config.numPostsToLoad;
     const postsToLoad = this.getPostsToLoad();
@@ -192,11 +183,12 @@ class App extends React.Component {
             avatarAlt={config.header.avatarAlt}
             title={config.header.title}
             description={config.header.description}
+          />
+          <Navbar
             pages={pages}
             getPage={this.getPage}
-            onNavbarFixed={this.handleNavbarFixed}
           />
-          <div className={`content ${this.state.contentClassname}`}>
+          <div className="content">
             <div className="inner-content" >
               <Switch>
                 <Route
