@@ -95,14 +95,14 @@ class App extends React.Component {
   getImage(url) {
     const image = this.state.images[url];
     if (image) {
-      if (!image.loaded) {
+      if (!image.loaded && !image.img.src) {
         image.img.onload = () => {
           const images = this.state.images;
           images[url].loaded = true;
           images[url].displayImage = image.standard;
           this.setState({ images });
         };
-        image.img.src = `${config.domainName}/${image.standard}`;
+        image.img.src = `/${image.standard}`;
       }
       return image.displayImage;
     }
