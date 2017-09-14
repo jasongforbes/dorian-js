@@ -24,7 +24,7 @@ export function importAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }
 
-export function loadMarkdown(frontMatter, fileNames, sortFunc = null) {
+export function loadMarkdown(frontMatter, fileNames, sortFunc = undefined) {
   const files = frontMatter.map((e, i) => ({
     frontMatter: e,
     file: fileNames[i],
